@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Pindah Tombol Anime Responsif</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet"> <!-- Font Pixel -->
+    <style>
+        body {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+            overflow: hidden;
+            background-image: url('dextop.gif'); /* Ganti dengan URL gambar latar belakang anime */
+            background-size: cover;
+            background-position: center;
+            font-family: 'Press Start 2P', cursive; /* Font Pixel */
+            color: white;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+            position: relative;
+        }
+
+        .message{
+            font-size: 4vw; /* Ukuran responsif berdasarkan lebar viewport */
+            display: none; /* Tersembunyi sampai menang */
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: rgba(255, 255, 255, 0.9);
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+        }
+        h1{
+            font-size: 8vw;
+            position: absolute;
+            top: 40%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: rgba(255, 255, 255, 0.9);
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+        }
+
+        button {
+            position: absolute;
+            padding: 1rem 2rem; /* Menggunakan rem untuk padding agar proporsional */
+            font-size: 1.2rem; /* Responsif menggunakan rem */
+            background-color: rgba(37, 211, 102, 0.8); /* Warna mirip tombol WhatsApp */
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: transform 0.2s, background-color 0.2s; /* Transisi saat warna berubah */
+            color: white;
+            font-family: 'Press Start 2P', cursive; /* Font Pixel */
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.6);
+        }
+
+        button:hover {
+            transform: scale(1.1); /* Efek zoom saat hover */
+        }
+
+        a {
+            display: none;
+            font-size: 1rem;
+            padding: 1rem 2rem;
+            background-color: rgba(0, 255, 0, 0.8); /* Warna latar belakang link */
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 5px;
+            position: absolute;
+            bottom: 10vh;
+            left: 50%;
+            transform: translateX(-50%);
+            box-shadow: 0 4px 15px rgba(0, 255, 0, 0.6);
+            font-family: 'Press Start 2P', cursive; /* Font Pixel */
+        }
+
+        a:hover {
+            background-color: rgba(0, 200, 0, 0.9); /* Warna saat hover */
+        }
+
+        /* Media Queries untuk ukuran layar lebih kecil */
+        @media (max-width: 768px) {
+        	body{
+        	background-image: url('mobile.gif');
+			}
+            .message{
+                font-size: 6vw; /* Ukuran font lebih besar untuk layar kecil */
+            }
+
+            button {
+                font-size: 1rem; /* Mengurangi ukuran tombol untuk layar kecil */
+                padding: 0.8rem 1.5rem; /* Mengurangi padding untuk layar kecil */
+            }
+
+            a {
+                font-size: 0.9rem; /* Ukuran font tautan lebih kecil */
+                padding: 0.8rem 1.5rem; /* Mengurangi padding pada tautan */
+            }
+        }
+
+        @media (max-width: 480px) {
+        	body{
+        	background-image: url('mobile.gif');
+			}
+            .message {
+                font-size: 8vw; /* Font lebih besar untuk layar sangat kecil */
+            }
+
+            button {
+                font-size: 0.7rem; /* Ukuran tombol lebih kecil */
+                padding: 0.6rem 1.2rem; /* Padding lebih kecil */
+            }
+
+            a {
+                font-size: 0.8rem; /* Ukuran font tautan lebih kecil */
+                padding: 0.6rem 1.2rem; /* Padding lebih kecil pada tautan */
+            }
+        }
+    </style>
+</head>
+<body>
+<h1>Kejar tombolnya</h1>
+	
+
+<div class="message" id="message">Selamat hehe!</div>
+<button id="tombol">Mulai!!</button>
+<a id="whatsappLink" href="" target="_blank">AMBIL HADIAH</a>
+
+<script>
+    const tombol = document.getElementById('tombol');
+    const message = document.getElementById('message');
+    const whatsappLink = document.getElementById('whatsappLink');
+    let count = 0; // Menghitung jumlah klik
+    let targetClicks = Math.floor(Math.random() * 9999) + 50;
+
+    const phoneNumber = '6285861877611'; // Ganti dengan nomor WhatsApp pembuat (format internasional)
+    const winningMessage = 'Saya berhasil menekan tombol di game! kirim pesan ini untuk mendapatkan hadiah. note: pesan ini hanya bisa digunakan oleh 1 pengguna.'; // Pesan yang ingin dikirim
+
+    // Fungsi untuk menghasilkan warna acak
+    function getRandomColor() {
+        const letters = '0123456789ABCDEF';
+        let color = '#';
+        for (let i = 0; i < 6; i++) {
+            color += letters[Math.floor(Math.random() * 16)];
+        }
+        return color;
+    }
+
+    tombol.addEventListener('click', function() {
+        count++;
+
+        // Jika jumlah klik mencapai target, menampilkan pesan selamat
+        if (count === targetClicks) {
+            message.style.display = 'block'; // Tampilkan pesan
+            tombol.style.display = 'none'; // Sembunyikan tombol
+            
+            // Membuat tautan ke WhatsApp dengan pesan yang sudah diatur
+            const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(winningMessage)}`;
+            whatsappLink.href = whatsappUrl;
+            whatsappLink.style.display = 'inline-block'; // Menampilkan tautan ke WhatsApp
+        } else {
+            tombol.textContent = 'Eits ga kena!';
+            
+            // Mengubah warna tombol secara acak
+            tombol.style.backgroundColor = getRandomColor();
+            
+            // Mendapatkan ukuran layar
+            const maxWidth = window.innerWidth - tombol.offsetWidth;
+            const maxHeight = window.innerHeight - tombol.offsetHeight;
+            
+            // Menentukan posisi acak
+            const randomX = Math.floor(Math.random() * maxWidth);
+            const randomY = Math.floor(Math.random() * maxHeight);
+
+            // Mengubah posisi tombol
+            tombol.style.left = randomX + 'px';
+            tombol.style.top = randomY + 'px';
+        }
+    });
+</script>
+
+</body>
+</html>
+
+
+
