@@ -138,21 +138,17 @@
 <div class="score" id="score">0</div>
 <div class="message" id="message">Selamat hehe!</div>
 <button id="tombol">Mulai!!</button>
-<a id="whatsappLink" href="" target="_blank">AMBIL HADIAH</a>
+<a href="index.html" >Mulai Ulang</a>
 
 <script>
     const tombol = document.getElementById('tombol');
     const message = document.getElementById('message');
-    const whatsappLink = document.getElementById('whatsappLink');
     const scoreDisplay = document.getElementById('score');
 
     let count = 0; // Menghitung jumlah klik
     let targetClicks = Math.floor(Math.random() * 9999) + 50;
     scoreDisplay.textContent = `${count}`;
-
-    const phoneNumber = '6285861877611'; // Ganti dengan nomor WhatsApp pembuat (format internasional)
-    const winningMessage = 'Saya berhasil menekan tombol di game! kirim pesan ini untuk mendapatkan hadiah. note: pesan ini hanya bisa digunakan oleh 1 pengguna.'; // Pesan yang ingin dikirim
-
+	
     // Fungsi untuk menghasilkan warna acak
     function getRandomColor() {
         const letters = '0123456789ABCDEF';
@@ -174,11 +170,7 @@
             message.style.display = 'block'; // Tampilkan pesan
             tombol.style.display = 'none'; // Sembunyikan tombol
             
-            // Membuat tautan ke WhatsApp dengan pesan yang sudah diatur
-            const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(winningMessage)}`;
-            whatsappLink.href = whatsappUrl;
-            whatsappLink.style.display = 'inline-block'; // Menampilkan tautan ke WhatsApp
-        } else {
+            } else {
             tombol.textContent = 'Eits ga kena!';
             
             // Mengubah warna tombol secara acak
