@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chase the button</title>
+    <title>Game Pindah Tombol Anime Responsif</title>
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet"> <!-- Font Pixel -->
     <style>
         body {
@@ -42,6 +42,14 @@
             text-align: center;
             color: rgba(255, 255, 255, 0.9);
             text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+        }
+
+        .score {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            font-size: 1.5rem;
+            color: white;
         }
 
         button {
@@ -125,8 +133,8 @@
 </head>
 <body>
 <h1>Kejar tombolnya</h1>
-	
 
+<div class="score" id="score">Skor: 0</div> <!-- Menampilkan skor -->
 <div class="message" id="message">Selamat hehe!</div>
 <button id="tombol">Mulai!!</button>
 <a id="whatsappLink" href="" target="_blank">AMBIL HADIAH</a>
@@ -135,8 +143,11 @@
     const tombol = document.getElementById('tombol');
     const message = document.getElementById('message');
     const whatsappLink = document.getElementById('whatsappLink');
+    const scoreDisplay = document.getElementById('score');
+
     let count = 0; // Menghitung jumlah klik
     let targetClicks = Math.floor(Math.random() * 9999) + 50;
+    scoreDisplay.textContent = `Skor: ${count}`;
 
     const phoneNumber = '6285861877611'; // Ganti dengan nomor WhatsApp pembuat (format internasional)
     const winningMessage = 'Saya berhasil menekan tombol di game! kirim pesan ini untuk mendapatkan hadiah. note: pesan ini hanya bisa digunakan oleh 1 pengguna.'; // Pesan yang ingin dikirim
@@ -153,6 +164,9 @@
 
     tombol.addEventListener('click', function() {
         count++;
+
+        // Update skor
+        scoreDisplay.textContent = `Skor: ${count}`;
 
         // Jika jumlah klik mencapai target, menampilkan pesan selamat
         if (count === targetClicks) {
@@ -186,6 +200,3 @@
 
 </body>
 </html>
-
-
-
